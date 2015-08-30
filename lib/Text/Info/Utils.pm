@@ -24,6 +24,8 @@ sub _build_CLD {
 
 =item text2words( $text )
 
+Returns an array reference of the words in the specified C<$text>.
+
 =cut
 
 sub text2words {
@@ -72,7 +74,10 @@ sub squish {
     my $text = shift // '';
 
     $text =~ s/\s+/ /sg;
-    $text =~ s/\s+,\s+/, /sg;
+
+    foreach my $sep ( (".", ",", "!", "?", ":", ";", "´", "`", "'") ) {
+        $text =~ s/\s+\Q$sep\E\s+/, /sg;
+    }
 
     return $self->trim( $text );
 }
