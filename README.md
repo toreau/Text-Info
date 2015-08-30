@@ -46,6 +46,9 @@ Version 0.01.
     the latter overrides whatever the detection algorithm returns.
 
 - readability()
+
+    Returns an instance of the text's [Text::Info::Readability](https://metacpan.org/pod/Text::Info::Readability) class.
+
 - sentences()
 
     Returns an array reference of the text's sentences as `Text::Info::Sentence`
@@ -112,10 +115,6 @@ Version 0.01.
     Returns the number of syllables in the text. This method requires that
     Lingua::\_\_::Syllable is available for the language in question. This method
     is derived from [Text::Info::BASE](https://metacpan.org/pod/Text::Info::BASE).
-
-    \_\_PACKAGE\_\_->meta->make\_immutable;
-
-    1;
 
 # SEE ALSO
 

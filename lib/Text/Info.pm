@@ -64,6 +64,8 @@ the latter overrides whatever the detection algorithm returns.
 
 =item readability()
 
+Returns an instance of the text's L<Text::Info::Readability> class.
+
 =cut
 
 has 'readability' => ( isa => 'Text::Info::Readability', is => 'ro', lazy_build => 1 );
@@ -160,6 +162,8 @@ as C<ngrams(4)>. This is a helper method and is derived from L<Text::Info::BASE>
 Returns the number of syllables in the text. This method requires that
 Lingua::__::Syllable is available for the language in question. This method
 is derived from L<Text::Info::BASE>.
+
+=cut
 
 __PACKAGE__->meta->make_immutable;
 
