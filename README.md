@@ -17,8 +17,8 @@ Version 0.01.
 
 # DESCRIPTION
 
-[Text::Info](https://metacpan.org/pod/Text::Info) is an extensible and easy to use solution for retrieving usefull
-information about any (indo-european) text.
+[Text::Info](https://metacpan.org/pod/Text::Info) is an extensible and easy to use solution for retrieving useful
+information about texts based on the [Germanic languages](https://en.wikipedia.org/wiki/Germanic_languages).
 
 The solution is under heavy development, and its API will definitely change.
 Please respect this fact if you intend to use it.
