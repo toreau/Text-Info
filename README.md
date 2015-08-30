@@ -26,6 +26,14 @@ if you intend to use it.
 
 Contributions are welcome!
 
+# WARNING!
+
+This solution is - and will be - heavily based on language-specific features.
+This means that if you use this solution on languages that doesn't have the
+required "support modules", you're on your own. For the time being this only
+affects the [Text::Info::Readability](https://metacpan.org/pod/Text::Info::Readability) functionality, but will in the future
+also include stemming- and stop word-functionality.
+
 # METHODS
 
 - new()
