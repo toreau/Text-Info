@@ -132,10 +132,54 @@ sub _build_sentences {
     return \@sentences;
 }
 
+=item sentence_count()
+
+Returns the number of sentences in the text.
+
+=cut
+
+has 'sentence_count' => ( isa => 'Int', is => 'ro', lazy_build => 1 );
+
+sub _build_sentence_count {
+    my $self = shift;
+
+    return scalar( @{$self->sentences} );
+}
+
+=item avg_sentence_length()
+
+Returns the average length of the sentences in the text.
+
+=cut
+
+has 'avg_sentence_length' => ( isa => 'Num', is => 'ro', lazy_build => 1 );
+
+sub _build_avg_sentence_length {
+    my $self = shift;
+
+    my $total_length = 0;
+
+    foreach my $sentence ( @{$self->sentences} ) {
+        $total_length += length( $sentence->text );
+    }
+
+    return $total_length / $self->sentence_count;
+}
+
 =item words()
 
 Returns an array reference containing the text's words. This method is derived
 from L<Text::Info::BASE>.
+
+=item word_count()
+
+Returns the number of words in the text. This is a helper method and is derived
+from L<Text::Info::BASE>.
+
+=item avg_word_length()
+
+Returns the average length of the words in the text. This is a helper method and
+is derived from L<Text::Info::BASE>.
 
 =item ngrams( $size )
 
@@ -180,50 +224,6 @@ as C<ngrams(3)>. This is a helper method and is derived from L<Text::Info::BASE>
 Returns an array reference containing the text's quadgrams, i.e. the same
 as C<ngrams(4)>. This is a helper method and is derived from L<Text::Info::BASE>.
 
-=item word_count()
-
-Returns the number of words in the text. This is a helper method and is derived
-from L<Text::Info::BASE>.
-
-=item avg_word_length()
-
-Returns the average length of the words in the text. This is a helper method and
-is derived from L<Text::Info::BASE>.
-
-=item sentence_count()
-
-Returns the number of sentences in the text.
-
-=cut
-
-has 'sentence_count' => ( isa => 'Int', is => 'ro', lazy_build => 1 );
-
-sub _build_sentence_count {
-    my $self = shift;
-
-    return scalar( @{$self->sentences} );
-}
-
-=item avg_sentence_length()
-
-Returns the average length of the sentences in the text.
-
-=cut
-
-has 'avg_sentence_length' => ( isa => 'Num', is => 'ro', lazy_build => 1 );
-
-sub _build_avg_sentence_length {
-    my $self = shift;
-
-    my $total_length = 0;
-
-    foreach my $sentence ( @{$self->sentences} ) {
-        $total_length += length( $sentence->text );
-    }
-
-    return $total_length / $self->sentence_count;
-}
-
 =item syllable_count()
 
 Returns the number of syllables in the text. This method requires that
@@ -253,6 +253,14 @@ sub _build_fres {
 __PACKAGE__->meta->make_immutable;
 
 1;
+
+=back
+
+=head1 SEE ALSO
+
+=over 4
+
+=item * L<Text::Info::Sentence>
 
 =back
 
