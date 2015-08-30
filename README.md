@@ -21,7 +21,7 @@ Version 0.01.
 information about texts based on the [Germanic languages](https://en.wikipedia.org/wiki/Germanic_languages).
 
 For the time being it has a limited feature set, but the plan is to use this
-as a basis for more NLP-solutions.
+as a basis for NLP-solutions.
 
 The solution is under heavy development, and the API will definitely change.
 Please respect these facts if you intend to use it.
