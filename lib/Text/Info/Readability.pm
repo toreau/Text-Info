@@ -21,6 +21,24 @@ use L<Text::Info> to access this class' methods.
 
 =over
 
+=item can_be_calculated()
+
+Returns true if the text's readability can be calculated, false otherwise.
+
+=cut
+
+has 'can_be_calculated' => ( isa => 'Bool', is => 'ro', lazy_build => 1 );
+
+sub _build_can_be_calculated {
+    my $self = shift;
+
+    return undef if ( $self->text           eq '' );
+    return undef if ( $self->sentence_count == 0  );
+    return undef if ( $self->word_count     == 0  );
+
+    return 1;
+}
+
 =item fres()
 
 Returns the text's "Flesch reading ease score" (FRES), a text readability score.
@@ -36,9 +54,7 @@ has 'fres' => ( isa => 'Maybe[Num]', is => 'ro', lazy_build => 1 );
 sub _build_fres {
     my $self = shift;
 
-    return undef if ( $self->text           eq '' );
-    return undef if ( $self->sentence_count == 0  );
-    return undef if ( $self->word_count     == 0  );
+    return undef unless ( $self->can_be_calculated );
 
     my $words_per_sentence = $self->word_count / $self->sentence_count;
     my $syllables_per_word = $self->syllable_count / $self->word_count;
@@ -63,9 +79,7 @@ has 'fkrgl' => ( isa => 'Maybe[Num]', is => 'ro', lazy_build => 1 );
 sub _build_fkrgl {
     my $self = shift;
 
-    return undef if ( $self->text           eq '' );
-    return undef if ( $self->sentence_count == 0  );
-    return undef if ( $self->word_count     == 0  );
+    return undef unless ( $self->can_be_calculated );
 
     my $words_per_sentence = $self->word_count / $self->sentence_count;
     my $syllables_per_word = $self->syllable_count / $self->word_count;
