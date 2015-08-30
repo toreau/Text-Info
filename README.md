@@ -158,7 +158,7 @@ You can also look for information at:
 
     [http://search.cpan.org/dist/Text-Info/](http://search.cpan.org/dist/Text-Info/)
 
-- github
+- GitHub
 
     [https://github.com/toreau/Text-Info](https://github.com/toreau/Text-Info)
 

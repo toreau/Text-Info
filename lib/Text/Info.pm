@@ -220,7 +220,7 @@ L<http://cpanratings.perl.org/d/Text-Info>
 
 L<http://search.cpan.org/dist/Text-Info/>
 
-=item * github
+=item * GitHub
 
 L<https://github.com/toreau/Text-Info>
 
