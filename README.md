@@ -45,10 +45,11 @@ Version 0.01.
     former is a helper for detecting the correct language of the text, while
     the latter overrides whatever the detection algorithm returns.
 
+- readability()
 - sentences()
 
     Returns an array reference of the text's sentences as `Text::Info::Sentence`
-    objects.
+    objects. This method is derived from [Text::Info::BASE](https://metacpan.org/pod/Text::Info::BASE).
 
     Keep in mind that this method tries to remove any separators, so the sentences
     returned should NOT contain those. For example "This is a sentence!" will be
@@ -56,11 +57,13 @@ Version 0.01.
 
 - sentence\_count()
 
-    Returns the number of sentences in the text.
+    Returns the number of sentences in the text. This method is derived from
+    [Text::Info::BASE](https://metacpan.org/pod/Text::Info::BASE).
 
 - avg\_sentence\_length()
 
-    Returns the average length of the sentences in the text.
+    Returns the average length of the sentences in the text. This method is derived
+    from [Text::Info::BASE](https://metacpan.org/pod/Text::Info::BASE).
 
 - words()
 
@@ -110,25 +113,14 @@ Version 0.01.
     Lingua::\_\_::Syllable is available for the language in question. This method
     is derived from [Text::Info::BASE](https://metacpan.org/pod/Text::Info::BASE).
 
-- fres()
+    \_\_PACKAGE\_\_->meta->make\_immutable;
 
-    Returns the text's "Flesch reading ease score" (FRES), a text readability score.
-    See [Flesch–Kincaid readability tests](https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests) on Wikipedia for more information.
-
-    Returns undef is it's impossible to calculate the score, for example if the
-    there is no text, no sentences that could be detected etc.
-
-- fkrgl()
-
-    Returns the text's "Flesch–Kincaid reading grade level", a text readability score.
-    See [Flesch–Kincaid readability tests](https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests) on Wikipedia for more information.
-
-    Returns undef is it's impossible to calculate the score, for example if the
-    there is no text, no sentences that could be detected etc.
+    1;
 
 # SEE ALSO
 
 - [Text::Info::Sentence](https://metacpan.org/pod/Text::Info::Sentence)
+- [Text::Info::Readability](https://metacpan.org/pod/Text::Info::Readability)
 
 # AUTHOR
 

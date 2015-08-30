@@ -49,6 +49,88 @@ around 'BUILDARGS' => sub {
     }
 };
 
+has 'sentences' => ( isa => 'ArrayRef[Text::Info::Sentence]', is => 'ro', lazy_build => 1 );
+
+sub _build_sentences {
+    my $self = shift;
+
+    my $marker = '</marker/>';
+    my $text   = $self->text;
+    my $separators = '.?!:;';
+
+    # Mark separators with a marker.
+    $text =~ s/([\Q$separators\E]+\s*)/$1$marker/sg;
+
+    # Abbreviations.
+    foreach ( qw( Prof Ph Dr Mr Mrs Ms Hr St ) ) {
+        $text =~ s/($_\.\s+)\Q$marker\E/$1/sg;
+    }
+
+    # U.N., U.S.A.
+    $text =~ s/([[:upper:]]{1}\.)\Q$marker\E/$1/sg;
+
+    # Clockwork.
+    $text =~ s/(kl\.\s+)\Q$marker\E(\d+.)(\d+.)\Q$marker\E(\d+)/$1$2$3$4/sg;
+    $text =~ s/(kl\.\s+)\Q$marker\E(\d+.)\Q$marker\E(\d+)/$1$2$3/sg;
+    $text =~ s/(\d+.)\Q$marker\E(\d+)/$1$2/sg;
+    $text =~ s/(\d+.)\Q$marker\E(\d+.)\Q$marker\E(\d+)/$1$2$3/sg;
+    $text =~ s/(\d+\s+[ap]\.)\Q$marker\E(m\.\s*)\Q$marker\E/$1$2/sg;
+    $text =~ s/(\d+\s+[ap]m\.\s+)\Q$marker\E/$1/sg;
+
+    # Remove marker if it looks like we're dealing with a date abbrev., like "Nov. 29" etc.
+    my @months = qw( Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );
+    foreach my $month ( @months ) {
+        $text =~ s/($month\.\s+)\Q$marker\E(\d+)/$1$2/sg;
+    }
+
+    # Markers immediately followed by a (possible space and) lowercased character should be removed.
+    # This is useful for TLDs/domain names like "cnn.com".
+    $text =~ s/\Q$marker\E\s*([[:lower:]])/$1/sg;
+
+    # Markers immediately prefixed by a space + single uppercased characters should be removed.
+    # This is fine for f.ex. names like "Magne T. Øierud".
+    $text =~ s/(\s+[[:upper:]]\.\s+)\Q$marker\E/$1/sg;
+
+    # Build sentences.
+    my @sentences = ();
+
+    foreach my $sentence ( split(/\Q$marker\E/, $text) ) {
+        1 while ( $sentence =~ s/[\Q$separators\E\s]$// );
+
+        $sentence =  $self->squish( $sentence );
+        $sentence =~ s/^\-+\s*//sg;
+
+        if ( length $sentence ) {
+            push( @sentences, Text::Info::Sentence->new(text => $sentence, tld => $self->tld) );
+        }
+    }
+
+    # Return
+    return \@sentences;
+}
+
+has 'sentence_count' => ( isa => 'Int', is => 'ro', lazy_build => 1 );
+
+sub _build_sentence_count {
+    my $self = shift;
+
+    return scalar( @{$self->sentences} );
+}
+
+has 'avg_sentence_length' => ( isa => 'Num', is => 'ro', lazy_build => 1 );
+
+sub _build_avg_sentence_length {
+    my $self = shift;
+
+    my $total_length = 0;
+
+    foreach my $sentence ( @{$self->sentences} ) {
+        $total_length += length( $sentence->text );
+    }
+
+    return $total_length / $self->sentence_count;
+}
+
 has 'words' => ( isa => 'ArrayRef[Str]', is => 'ro', lazy_build => 1 );
 
 sub _build_words {

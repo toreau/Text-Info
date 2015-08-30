@@ -1,4 +1,4 @@
-package Text::Info::Sentence;
+package Text::Info::Readability;
 use Moose;
 use namespace::autoclean;
 
@@ -8,60 +8,72 @@ extends 'Text::Info::BASE';
 
 =head1 NAME
 
-Text::Info::Sentence - An object-oriented representation of a sentence.
+Text::Info::Readability - Information about a text's readability.
 
 =head1 DESCRIPTION
 
-You should never instantiate objects of this class directly, but instead
-use L<Text::Info> to create a general text object and retrieve the
-L<Text::Info::Sentence> objects from that with its C<sentences()> method.
+See Wikipedia's article about L<readability tests|https://en.wikipedia.org/wiki/Readability_test> for more information.
+
+You should never instantiate objects of the class directly, but instead
+use L<Text::Info> to access this class' methods.
 
 =head1 METHODS
 
 =over
 
-=item words()
+=item fres()
 
-Returns an array reference containing the sentence's words. This method is
-derived from L<Text::Info::BASE>.
+Returns the text's "Flesch reading ease score" (FRES), a text readability score.
+See L<Flesch–Kincaid readability tests|https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests> on Wikipedia for more information.
 
-=item word_count()
-
-Returns the number of words in the sentence. This is a helper method and is
-derived from L<Text::Info::BASE>.
-
-=item avg_word_length()
-
-Returns the average length of the words in the sentence. This is a helper
-method and is derived from L<Text::Info::BASE>.
-
-=item ngrams( $size )
-
-Returns an array reference containing the sentence's ngrams of size C<$size>.
-Default size is 2 (i.e. bigrams). This method is derived from
-L<Text::Info::BASE>.
-
-=item unigrams()
-
-Returns an array reference containing the sentence's unigrams, i.e. the same
-as C<ngrams(1)>. This is a helper method and is derived from L<Text::Info::BASE>.
-
-=item bigrams()
-
-Returns an array reference containing the sentence's bigrams, i.e. the same
-as C<ngrams(2)>. This is a helper method and is derived from L<Text::Info::BASE>.
-
-=item trigrams()
-
-Returns an array reference containing the sentence's trigrams, i.e. the same
-as C<ngrams(3)>. This is a helper method and is derived from L<Text::Info::BASE>.
-
-=item quadgrams()
-
-Returns an array reference containing the sentence's quadgrams, i.e. the same
-as C<ngrams(4)>. This is a helper method and is derived from L<Text::Info::BASE>.
+Returns undef is it's impossible to calculate the score, for example if the
+there is no text, no sentences that could be detected etc.
 
 =cut
+
+has 'fres' => ( isa => 'Maybe[Num]', is => 'ro', lazy_build => 1 );
+
+sub _build_fres {
+    my $self = shift;
+
+    return undef if ( $self->text           eq '' );
+    return undef if ( $self->sentence_count == 0  );
+    return undef if ( $self->word_count     == 0  );
+
+    my $words_per_sentence = $self->word_count / $self->sentence_count;
+    my $syllables_per_word = $self->syllable_count / $self->word_count;
+
+    my $score = 206.835 - ( ($words_per_sentence * 1.015) + ($syllables_per_word * 84.6) );
+
+    return sprintf( '%.2f', $score );
+}
+
+=item fkrgl()
+
+Returns the text's "Flesch–Kincaid reading grade level", a text readability score.
+See L<Flesch–Kincaid readability tests|https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests> on Wikipedia for more information.
+
+Returns undef is it's impossible to calculate the score, for example if the
+there is no text, no sentences that could be detected etc.
+
+=cut
+
+has 'fkrgl' => ( isa => 'Maybe[Num]', is => 'ro', lazy_build => 1 );
+
+sub _build_fkrgl {
+    my $self = shift;
+
+    return undef if ( $self->text           eq '' );
+    return undef if ( $self->sentence_count == 0  );
+    return undef if ( $self->word_count     == 0  );
+
+    my $words_per_sentence = $self->word_count / $self->sentence_count;
+    my $syllables_per_word = $self->syllable_count / $self->word_count;
+
+    my $score = ( ($words_per_sentence * 0.39) + ($syllables_per_word * 11.8) ) - 15.59;
+
+    return sprintf( '%.2f', $score );
+}
 
 __PACKAGE__->meta->make_immutable;
 

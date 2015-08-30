@@ -11,7 +11,7 @@ my $text = Text::Info->new(
     language => 'en',
 );
 
-is( $text->fres, '34.53', 'FRES value is OK!' );
+is( $text->readability->fres, '34.53', 'FRES value is OK!' );
 
 #
 # FRES: Norwegian
@@ -21,7 +21,7 @@ $text = Text::Info->new(
     language => 'no',
 );
 
-is( $text->fres, '47.10', 'FRES value is OK!' );
+is( $text->readability->fres, '47.10', 'FRES value is OK!' );
 
 #
 # FGLS: https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests#Flesch.E2.80.93Kincaid_grade_level
@@ -31,7 +31,7 @@ $text = Text::Info->new(
     language => 'en',
 );
 
-is( $text->fkrgl, '13.08', 'FGLS value is OK!' );
+is( $text->readability->fkrgl, '13.08', 'FGLS value is OK!' );
 
 #
 # The End

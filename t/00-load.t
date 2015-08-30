@@ -12,6 +12,6 @@ ok( my $text = Text::Info->new );
 
 is( $text->sentence_count, 0 );
 is( $text->word_count, 0 );
-is( $text->fres, undef );
+is( $text->readability->fres, undef );
 
 done_testing;
