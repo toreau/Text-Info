@@ -232,7 +232,7 @@ is derived from L<Text::Info::BASE>.
 
 =item fres()
 
-Returns the text's "Flesch reading ease score" (FRES), i.e. its readability.
+Returns the text's "Flesch reading ease score" (FRES), a text readability score.
 See L<Flesch–Kincaid readability tests|https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests> on Wikipedia for more information.
 
 Returns undef is it's impossible to calculate the score, for example if the
@@ -252,9 +252,36 @@ sub _build_fres {
     my $words_per_sentence = $self->word_count / $self->sentence_count;
     my $syllables_per_word = $self->syllable_count / $self->word_count;
 
-    my $readability = 206.835 - ( ($words_per_sentence * 1.015) + ($syllables_per_word * 84.6) );
+    my $score = 206.835 - ( ($words_per_sentence * 1.015) + ($syllables_per_word * 84.6) );
 
-    return sprintf( '%.2f', $readability );
+    return sprintf( '%.2f', $score );
+}
+
+=item fkrgl()
+
+Returns the text's "Flesch–Kincaid reading grade level", a text readability score.
+See L<Flesch–Kincaid readability tests|https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests> on Wikipedia for more information.
+
+Returns undef is it's impossible to calculate the score, for example if the
+there is no text, no sentences that could be detected etc.
+
+=cut
+
+has 'fkrgl' => ( isa => 'Maybe[Num]', is => 'ro', lazy_build => 1 );
+
+sub _build_fkrgl {
+    my $self = shift;
+
+    return undef if ( $self->text           eq '' );
+    return undef if ( $self->sentence_count == 0  );
+    return undef if ( $self->word_count     == 0  );
+
+    my $words_per_sentence = $self->word_count / $self->sentence_count;
+    my $syllables_per_word = $self->syllable_count / $self->word_count;
+
+    my $score = ( ($words_per_sentence * 0.39) + ($syllables_per_word * 11.8) ) - 15.59;
+
+    return sprintf( '%.2f', $score );
 }
 
 __PACKAGE__->meta->make_immutable;

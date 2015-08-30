@@ -112,7 +112,15 @@ Version 0.01.
 
 - fres()
 
-    Returns the text's "Flesch reading ease score" (FRES), i.e. its readability.
+    Returns the text's "Flesch reading ease score" (FRES), a text readability score.
+    See [Flesch–Kincaid readability tests](https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests) on Wikipedia for more information.
+
+    Returns undef is it's impossible to calculate the score, for example if the
+    there is no text, no sentences that could be detected etc.
+
+- fkrgl()
+
+    Returns the text's "Flesch–Kincaid reading grade level", a text readability score.
     See [Flesch–Kincaid readability tests](https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests) on Wikipedia for more information.
 
     Returns undef is it's impossible to calculate the score, for example if the
