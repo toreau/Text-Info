@@ -242,6 +242,10 @@ has 'fres' => ( isa => 'Num', is => 'ro', lazy_build => 1 );
 sub _build_fres {
     my $self = shift;
 
+    return 0 if ( $self->text           eq '' );
+    return 0 if ( $self->sentence_count == 0  );
+    return 0 if ( $self->word_count     == 0  );
+
     my $words_per_sentence = $self->word_count / $self->sentence_count;
     my $syllables_per_word = $self->syllable_count / $self->word_count;
 

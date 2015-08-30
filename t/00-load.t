@@ -8,4 +8,10 @@ BEGIN {
 
 diag( 'Testing Text::Info ' . $Text::Info::VERSION );
 
+ok( my $text = Text::Info->new );
+
+is( $text->sentence_count, 0 );
+is( $text->word_count, 0 );
+is( $text->fres, 0 );
+
 done_testing;

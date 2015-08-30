@@ -8,9 +8,9 @@ use Module::Load;
 use Unicode::Normalize;
 
 has 'text' => (
-    isa     => 'Str',
-    is      => 'rw',
-    default => '',
+    isa      => 'Str',
+    is       => 'rw',
+    default  => '',
 );
 
 has 'tld' => (
