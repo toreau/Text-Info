@@ -35,6 +35,9 @@ affects the [Text::Info::Readability](https://metacpan.org/pod/Text::Info::Reada
 also include stemming- and stop word-functionality (and probably many other
 things).
 
+What you can do to help on this, is to create the missing supported modules,
+for example create a Lingua::\_\_::Syllable module specific for your language.
+
 # METHODS
 
 - new()

@@ -50,6 +50,9 @@ affects the L<Text::Info::Readability> functionality, but will in the future
 also include stemming- and stop word-functionality (and probably many other
 things).
 
+What you can do to help on this, is to create the missing supported modules,
+for example create a Lingua::__::Syllable module specific for your language.
+
 =head1 METHODS
 
 =over
