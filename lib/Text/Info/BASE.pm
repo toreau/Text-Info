@@ -54,12 +54,18 @@ has 'sentences' => ( isa => 'ArrayRef[Text::Info::Sentence]', is => 'ro', lazy_b
 sub _build_sentences {
     my $self = shift;
 
-    my $marker = '</marker/>';
-    my $text   = $self->text;
+    my $marker     = '</marker/>';
+    my $text       = $self->text;
     my $separators = '.?!:;';
 
     # Mark separators with a marker.
     $text =~ s/([\Q$separators\E]+\s*)/$1$marker/sg;
+
+    # Markers immediately prefixed by a lowercase + uppercased characters, and again followed
+    # by a marker, a space and "normal" stuff should be removed.
+    # Expample: If you want cake, open door A. </marker/>If you want a car, open door C.</marker/>
+    # die $text;
+    # $text =~ s/([[:lower:]]\s+[[:upper:]]\.\s+)<\/marker\/>([[:upper:]].*?)\Q$marker\E/$1$2/sg;
 
     # Abbreviations.
     foreach ( qw( Prof Ph Dr Mr Mrs Ms Hr St ) ) {
@@ -79,6 +85,7 @@ sub _build_sentences {
 
     # Remove marker if it looks like we're dealing with a date abbrev., like "Nov. 29" etc.
     my @months = qw( Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );
+
     foreach my $month ( @months ) {
         $text =~ s/($month\.\s+)\Q$marker\E(\d+)/$1$2/sg;
     }
@@ -88,7 +95,7 @@ sub _build_sentences {
     $text =~ s/\Q$marker\E\s*([[:lower:]])/$1/sg;
 
     # Markers immediately prefixed by a space + single uppercased characters should be removed.
-    # This is fine for f.ex. names like "Magne T. Øierud".
+    # This is fine for f.ex. names like "Tore O. Aursand".
     $text =~ s/(\s+[[:upper:]]\.\s+)\Q$marker\E/$1/sg;
 
     # Build sentences.

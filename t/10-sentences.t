@@ -106,6 +106,15 @@ my %tests = (
         "Jeg skjønner ikke hvordan det er mulig å gjøre et så dårlig strategisk valg",
         "De har selv bidratt til at Fabian Stang og Stian Berger Røsland mest sannsynlig får fortsette, sier pr-nestor Hans Geelmuyden, sjef i Geelmuyden Kiese",
     ],
+
+    "Tor M. Sonsson" => [
+        "Tor M. Sonsson",
+    ],
+
+    # "If you want cake open, door A. If you want a car, open door C." => [
+    #     "If you want cake, open door A",
+    #     "If you want a car, open door C",
+    # ],
 );
 
 foreach my $sentence ( keys %tests ) {
