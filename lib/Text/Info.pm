@@ -187,23 +187,8 @@ from L<Text::Info::BASE>.
 
 =item avg_word_length()
 
-Returns the average length of the words in the text.
-
-=cut
-
-has 'avg_word_length' => ( isa => 'Num', is => 'ro', lazy_build => 1 );
-
-sub _build_avg_word_length {
-    my $self = shift;
-
-    my $total_length = 0;
-
-    foreach my $word ( @{$self->words} ) {
-        $total_length += length( $word );
-    }
-
-    return $total_length / $self->word_count;
-}
+Returns the average length of the words in the text. This is a helper method and
+is derived from L<Text::Info::BASE>.
 
 =item sentence_count()
 
