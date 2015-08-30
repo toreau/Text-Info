@@ -55,10 +55,28 @@ METHODS
       sentences returned should NOT contain those. For example "This is a
       sentence!" will be returned as "This is a sentence".
 
+    sentence_count()
+
+      Returns the number of sentences in the text.
+
+    avg_sentence_length()
+
+      Returns the average length of the sentences in the text.
+
     words()
 
       Returns an array reference containing the text's words. This method
       is derived from Text::Info::BASE.
+
+    word_count()
+
+      Returns the number of words in the text. This is a helper method and
+      is derived from Text::Info::BASE.
+
+    avg_word_length()
+
+      Returns the average length of the words in the text. This is a helper
+      method and is derived from Text::Info::BASE.
 
     ngrams( $size )
 
@@ -92,24 +110,6 @@ METHODS
       same as ngrams(4). This is a helper method and is derived from
       Text::Info::BASE.
 
-    word_count()
-
-      Returns the number of words in the text. This is a helper method and
-      is derived from Text::Info::BASE.
-
-    avg_word_length()
-
-      Returns the average length of the words in the text. This is a helper
-      method and is derived from Text::Info::BASE.
-
-    sentence_count()
-
-      Returns the number of sentences in the text.
-
-    avg_sentence_length()
-
-      Returns the average length of the sentences in the text.
-
     syllable_count()
 
       Returns the number of syllables in the text. This method requires
@@ -122,6 +122,10 @@ METHODS
       readability. See Flesch–Kincaid readability tests
       <https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests>
       on Wikipedia for more information.
+
+SEE ALSO
+
+      * Text::Info::Sentence
 
 AUTHOR
 

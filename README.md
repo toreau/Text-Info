@@ -54,10 +54,28 @@ Version 0.01.
     returned should NOT contain those. For example "This is a sentence!" will be
     returned as "This is a sentence".
 
+- sentence\_count()
+
+    Returns the number of sentences in the text.
+
+- avg\_sentence\_length()
+
+    Returns the average length of the sentences in the text.
+
 - words()
 
     Returns an array reference containing the text's words. This method is derived
     from [Text::Info::BASE](https://metacpan.org/pod/Text::Info::BASE).
+
+- word\_count()
+
+    Returns the number of words in the text. This is a helper method and is derived
+    from [Text::Info::BASE](https://metacpan.org/pod/Text::Info::BASE).
+
+- avg\_word\_length()
+
+    Returns the average length of the words in the text. This is a helper method and
+    is derived from [Text::Info::BASE](https://metacpan.org/pod/Text::Info::BASE).
 
 - ngrams( $size )
 
@@ -86,24 +104,6 @@ Version 0.01.
     Returns an array reference containing the text's quadgrams, i.e. the same
     as `ngrams(4)`. This is a helper method and is derived from [Text::Info::BASE](https://metacpan.org/pod/Text::Info::BASE).
 
-- word\_count()
-
-    Returns the number of words in the text. This is a helper method and is derived
-    from [Text::Info::BASE](https://metacpan.org/pod/Text::Info::BASE).
-
-- avg\_word\_length()
-
-    Returns the average length of the words in the text. This is a helper method and
-    is derived from [Text::Info::BASE](https://metacpan.org/pod/Text::Info::BASE).
-
-- sentence\_count()
-
-    Returns the number of sentences in the text.
-
-- avg\_sentence\_length()
-
-    Returns the average length of the sentences in the text.
-
 - syllable\_count()
 
     Returns the number of syllables in the text. This method requires that
@@ -114,6 +114,10 @@ Version 0.01.
 
     Returns the text's "Flesh reading ease score" (FRES), i.e. its readability.
     See [Flesch–Kincaid readability tests](https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests) on Wikipedia for more information.
+
+# SEE ALSO
+
+- [Text::Info::Sentence](https://metacpan.org/pod/Text::Info::Sentence)
 
 # AUTHOR
 
