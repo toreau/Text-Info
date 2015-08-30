@@ -232,8 +232,11 @@ is derived from L<Text::Info::BASE>.
 
 =item fres()
 
-Returns the text's "Flesh reading ease score" (FRES), i.e. its readability.
+Returns the text's "Flesch reading ease score" (FRES), i.e. its readability.
 See L<Flesch–Kincaid readability tests|https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests> on Wikipedia for more information.
+
+Returns undef is it's impossible to calculate the score, for example if the
+there is no text, no sentences that could be detected etc.
 
 =cut
 
@@ -242,9 +245,9 @@ has 'fres' => ( isa => 'Num', is => 'ro', lazy_build => 1 );
 sub _build_fres {
     my $self = shift;
 
-    return 0 if ( $self->text           eq '' );
-    return 0 if ( $self->sentence_count == 0  );
-    return 0 if ( $self->word_count     == 0  );
+    return undef if ( $self->text           eq '' );
+    return undef if ( $self->sentence_count == 0  );
+    return undef if ( $self->word_count     == 0  );
 
     my $words_per_sentence = $self->word_count / $self->sentence_count;
     my $syllables_per_word = $self->syllable_count / $self->word_count;

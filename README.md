@@ -13,7 +13,7 @@ Version 0.01.
     my $text = Text::Info->new( "Some text..." );
 
     say "The text is written in language '" . $text->language . "',";
-    say "and has a FRES readability score of " . $text->fres;
+    say "and has a readability score (FRES) of " . $text->fres;
 
 # DESCRIPTION
 
@@ -112,8 +112,11 @@ Version 0.01.
 
 - fres()
 
-    Returns the text's "Flesh reading ease score" (FRES), i.e. its readability.
+    Returns the text's "Flesch reading ease score" (FRES), i.e. its readability.
     See [Flesch–Kincaid readability tests](https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests) on Wikipedia for more information.
+
+    Returns undef is it's impossible to calculate the score, for example if the
+    there is no text, no sentences that could be detected etc.
 
 # SEE ALSO
 
