@@ -240,7 +240,7 @@ there is no text, no sentences that could be detected etc.
 
 =cut
 
-has 'fres' => ( isa => 'Num', is => 'ro', lazy_build => 1 );
+has 'fres' => ( isa => 'Maybe[Num]', is => 'ro', lazy_build => 1 );
 
 sub _build_fres {
     my $self = shift;
