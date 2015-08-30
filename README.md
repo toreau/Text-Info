@@ -24,6 +24,8 @@ The solution is under heavy development, has a limited feature set for the
 time being, and its API will definitely change. Please respect these facts
 if you intend to use it.
 
+Contributions are welcome!
+
 # METHODS
 
 - new()
