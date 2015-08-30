@@ -47,7 +47,7 @@ Contributions are welcome!
 
 =item new()
 
-Returns a new L<Text::Info> object. Can take the C<text> as a single argument,
+Returns a new L<Text::Info> object. Can take C<text> as a single argument,
 optionally C<tld> (top level domain, for better language detection), and/or
 optionally C<language> if you want to specify the text's language yourself.
 

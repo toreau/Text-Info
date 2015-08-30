@@ -30,7 +30,7 @@ Contributions are welcome!
 
 - new()
 
-    Returns a new [Text::Info](https://metacpan.org/pod/Text::Info) object. Can take the `text` as a single argument,
+    Returns a new [Text::Info](https://metacpan.org/pod/Text::Info) object. Can take `text` as a single argument,
     optionally `tld` (top level domain, for better language detection), and/or
     optionally `language` if you want to specify the text's language yourself.
 
