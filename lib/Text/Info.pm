@@ -78,7 +78,7 @@ optionally C<language> if you want to specify the text's language yourself.
 
 It really doesn't make sense to set both C<tld> and C<language>, as the
 former is a helper for detecting the correct language of the text, while
-the latter overrides whatever the detection algorithm returns.
+the latter overrides whatever that detection algorithm returns.
 
 =item readability()
 

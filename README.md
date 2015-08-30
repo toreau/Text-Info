@@ -61,7 +61,7 @@ things).
 
     It really doesn't make sense to set both `tld` and `language`, as the
     former is a helper for detecting the correct language of the text, while
-    the latter overrides whatever the detection algorithm returns.
+    the latter overrides whatever that detection algorithm returns.
 
 - readability()
 
