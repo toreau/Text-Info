@@ -32,6 +32,12 @@ our $VERSION = '0.01';
 
 =head1 DESCRIPTION
 
+L<Text::Info> is an extensible and easy to use solution for retrieving usefull
+information about any (indo-european) text.
+
+The solution is under heavy development, and its API will definitely change.
+Please respect this fact if you intend to use it.
+
 =head1 METHODS
 
 =over
