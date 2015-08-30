@@ -13,7 +13,7 @@ Version 0.01.
     my $text = Text::Info->new( "Some text..." );
 
     say "The text is written in language '" . $text->language . "',";
-    say "and has a readability score (FRES) of " . $text->fres;
+    say "and has a readability score (FRES) of " . $text->readability->fres;
 
 # DESCRIPTION
 
