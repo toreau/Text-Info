@@ -52,7 +52,7 @@ things).
 
 =head1 METHODS
 
-=over 3
+=over 5
 
 =item new()
 
