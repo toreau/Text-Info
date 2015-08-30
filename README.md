@@ -65,7 +65,8 @@ things).
 
 - readability()
 
-    Returns an instance of the text's [Text::Info::Readability](https://metacpan.org/pod/Text::Info::Readability) class.
+    Returns an instance of the text's [Text::Info::Readability](https://metacpan.org/pod/Text::Info::Readability) class, which in turn
+    can be used to retrieve [readability information](https://en.wikipedia.org/wiki/Readability_test) about the text in question.
 
 - sentences()
 

@@ -82,7 +82,8 @@ the latter overrides whatever the detection algorithm returns.
 
 =item readability()
 
-Returns an instance of the text's L<Text::Info::Readability> class.
+Returns an instance of the text's L<Text::Info::Readability> class, which in turn
+can be used to retrieve L<readability information|https://en.wikipedia.org/wiki/Readability_test> about the text in question.
 
 =cut
 
