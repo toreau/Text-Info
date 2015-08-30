@@ -55,10 +55,18 @@ METHODS
       sentences returned should NOT contain those. For example "This is a
       sentence!" will be returned as "This is a sentence".
 
+    words()
+
+      Returns an array reference containing the text's words. This method
+      is derived from Text::Info::BASE.
+
     ngrams( $size )
 
       Returns an array reference containing the text's ngrams of size
-      $size. Default size is 2 (i.e. bigrams).
+      $size. Default size is 2 (i.e. bigrams). This method overrides
+      Text::Info::BASE's ngrams() method, as it takes into accounts
+      building ngrams based on the text's sentences, not the text's
+      complete list of words.
 
     unigrams()
 
@@ -86,11 +94,13 @@ METHODS
 
     word_count()
 
-      Returns the number of words in the text.
+      Returns the number of words in the text. This is a helper method and
+      is derived from Text::Info::BASE.
 
     avg_word_length()
 
-      Returns the average length of the words in the text.
+      Returns the average length of the words in the text. This is a helper
+      method and is derived from Text::Info::BASE.
 
     sentence_count()
 
@@ -99,6 +109,12 @@ METHODS
     avg_sentence_length()
 
       Returns the average length of the sentences in the text.
+
+    syllable_count()
+
+      Returns the number of syllables in the text. This method requires
+      that Lingua::__::Syllable is available for the language in question.
+      This method is derived from Text::Info::BASE.
 
     fres()
 
