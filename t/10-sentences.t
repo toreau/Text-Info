@@ -99,6 +99,13 @@ my %tests = (
         "Les også",
         "Saken mot blogger Eivind Berge",
     ],
+
+    "– Dette er den minst gjennomtenkte valgkampsaken i Norge på mange år. Her hadde Oslo Ap før første gang på mange år en god mulighet til å vinne makten i Oslo. Jeg skjønner ikke hvordan det er mulig å gjøre et så dårlig strategisk valg. De har selv bidratt til at Fabian Stang og Stian Berger Røsland mest sannsynlig får fortsette, sier pr-nestor Hans Geelmuyden, sjef i Geelmuyden Kiese." => [
+        "– Dette er den minst gjennomtenkte valgkampsaken i Norge på mange år",
+        "Her hadde Oslo Ap før første gang på mange år en god mulighet til å vinne makten i Oslo",
+        "Jeg skjønner ikke hvordan det er mulig å gjøre et så dårlig strategisk valg",
+        "De har selv bidratt til at Fabian Stang og Stian Berger Røsland mest sannsynlig får fortsette, sier pr-nestor Hans Geelmuyden, sjef i Geelmuyden Kiese",
+    ],
 );
 
 foreach my $sentence ( keys %tests ) {
