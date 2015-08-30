@@ -132,10 +132,17 @@ sub _build_sentences {
     return \@sentences;
 }
 
+=item words()
+
+Returns an array reference containing the text's words. This method is derived
+from L<Text::Info::BASE>.
+
 =item ngrams( $size )
 
 Returns an array reference containing the text's ngrams of size C<$size>.
-Default size is 2 (i.e. bigrams).
+Default size is 2 (i.e. bigrams). This method overrides L<Text::Info::BASE>'s
+C<ngrams()> method, as it takes into accounts building ngrams based on the
+text's sentences, not the text's complete list of words.
 
 =cut
 
@@ -175,17 +182,8 @@ as C<ngrams(4)>. This is a helper method and is derived from L<Text::Info::BASE>
 
 =item word_count()
 
-Returns the number of words in the text.
-
-=cut
-
-has 'word_count' => ( isa => 'Int', is => 'ro', lazy_build => 1 );
-
-sub _build_word_count {
-    my $self = shift;
-
-    return scalar( @{$self->words} );
-}
+Returns the number of words in the text. This is a helper method and is derived
+from L<Text::Info::BASE>.
 
 =item avg_word_length()
 
@@ -240,6 +238,12 @@ sub _build_avg_sentence_length {
 
     return $total_length / $self->sentence_count;
 }
+
+=item syllable_count()
+
+Returns the number of syllables in the text. This method requires that
+Lingua::__::Syllable is available for the language in question. This method
+is derived from L<Text::Info::BASE>.
 
 =item fres()
 

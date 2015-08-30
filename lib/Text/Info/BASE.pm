@@ -57,6 +57,18 @@ sub _build_words {
     return $self->text2words( $self->text );
 }
 
+=item word_count
+
+=cut
+
+has 'word_count' => ( isa => 'Int', is => 'ro', lazy_build => 1 );
+
+sub _build_word_count {
+    my $self = shift;
+
+    return scalar( @{$self->words} );
+}
+
 =item syllable_count
 
 =cut
