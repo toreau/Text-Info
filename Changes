@@ -1,6 +1,7 @@
 Revision history for Text::Info
 
 0.02    2015-11-28
+        - Added [MetaJSON] to dist.ini, so releases will include META.json
         - Added [GithubMeta] to dist.ini, so the dist metadata will include
           the github repo details
 
